@@ -1,4 +1,6 @@
 public enum validMove {
-	attack,
-	waddle
+	yawn,
+	block,
+	overt,
+	feint
 }

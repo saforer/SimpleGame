@@ -40,6 +40,6 @@ class MoveToMenu extends MenuOption {
 			target = Main.currentGame.player;
 		}
 		
-		MoveManager.DoMove(heldMove, target);
+		MoveManager.DoMove(heldMove, target, Main.currentGame.player);
 	}
 }

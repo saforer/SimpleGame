@@ -2,8 +2,11 @@ import java.util.*;
 
 class Mob {
 	public String name;
-	public int HP = 100;
+	public int HP;
+	public int damage;
 	public List<validMove> moveList = new ArrayList<validMove>();
+	public List<StatEffect> effectList = new ArrayList<StatEffect>();
+	public void GetMoveList() {}
 	
 	public void TakeTurn() {
 		int randomSelection = (int)(Math.random() * moveList.size());
@@ -16,22 +19,37 @@ class Mob {
 			target = Main.currentGame.enemy;
 		}
 		
-		MoveManager.DoMove(moveToDo, target);
+		MoveManager.DoMove(moveToDo, target, this);
 	}
 }
 
 class Player extends Mob {
 	public Player() {
+		GetMoveList();
 		name = "Player";
-		moveList.add(validMove.attack);
-		moveList.add(validMove.waddle);
+		HP = 100;
+		damage = 10;
+	}
+	
+	public void GetMoveList() {
+		moveList.add(validMove.overt);
+		moveList.add(validMove.feint);
+		moveList.add(validMove.block);
 	}
 }
 
 class Skeleton extends Mob {
 	public Skeleton() {
+		GetMoveList();
 		name = "Skeleton";
-		moveList.add(validMove.attack);
-		moveList.add(validMove.waddle);
+		HP = 100;
+		damage = 10;
+	}
+	
+	public void GetMoveList() {
+		moveList.add(validMove.overt);
+		moveList.add(validMove.feint);
+		moveList.add(validMove.block);
+		moveList.add(validMove.yawn);
 	}
 }

@@ -47,10 +47,17 @@ class GameMenu extends Menu {
 		}
 	}
 	
-		public void Run() {
+	public void Run() {
 		System.out.println(text);
 		System.out.println(Main.currentGame.player.name + " HP : " + Main.currentGame.player.HP + "\n");
+		for (StatEffect effect : Main.currentGame.player.effectList) {
+			System.out.println("Effect: " + effect.name + " for " + effect.durationLeft + " turns.");
+		}
+		
 		System.out.println(Main.currentGame.enemy.name + " HP : " + Main.currentGame.enemy.HP + "\n");
+		for (StatEffect effect : Main.currentGame.enemy.effectList) {
+			System.out.println("Effect: " + effect.name + " for " + effect.durationLeft + " turns.");
+		}
 		
 		int i = 0;
 		for (MenuOption option : heldOptions) {
@@ -64,16 +71,22 @@ class GameMenu extends Menu {
 		try {
 			selection = scan.nextInt();
 			heldOptions.get(selection).Execute();
-			Main.currentGame.enemy.TakeTurn();
-			if (Main.currentGame.enemy.HP <= 0) {
-				Main.currentMenu = new Victory();
-			}
-			if (Main.currentGame.player.HP <= 0) {
-				Main.currentMenu = new Loss();
-			}
 		} catch (Exception err) {
 			System.out.println("Please enter a valid option");
 		}
+		
+		if (Main.currentGame.enemy.HP <= 0) {
+			Main.currentMenu = new Victory();
+		}
+		
+		Main.currentGame.enemy.TakeTurn();
+		
+		
+		if (Main.currentGame.player.HP <= 0) {
+			Main.currentMenu = new Loss();
+		}
+		
+		Main.currentGame.Tick();
 	}
 }
 
