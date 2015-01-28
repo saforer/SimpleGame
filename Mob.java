@@ -6,7 +6,8 @@ class Mob {
 	public List<validMove> moveList = new ArrayList<validMove>();
 	
 	public void TakeTurn() {
-		validMove moveToDo = moveList.get(0);
+		int randomSelection = (int)(Math.random() * moveList.size());
+		validMove moveToDo = moveList.get(randomSelection);
 		
 		Mob target;
 		if (MoveManager.Offensive(moveToDo)) {
