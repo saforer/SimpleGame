@@ -1,6 +1,6 @@
-public enum validMove {
-	yawn,
-	block,
-	overt,
-	feint
+public enum ValidMove {
+	YAWN,
+	BLOCK,
+	OVERT,
+	FEINT
 }

@@ -9,7 +9,7 @@ class Main {
 		currentMenu = new TitleScreen();
 		
 		while (running) {
-			currentMenu.Run();
+			currentMenu.run();
 		}
 	}
 }

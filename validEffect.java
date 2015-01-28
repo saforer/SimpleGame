@@ -1,3 +1,3 @@
-public enum validEffect{
-	blocking
+public enum ValidEffect {
+	BLOCKING
 }

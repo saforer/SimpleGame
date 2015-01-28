@@ -1,30 +1,30 @@
 class Move {
 	public String name;
 	public boolean offensive;
-	public void Do(Mob target, Mob self) {}
+	public void execute(Mob target, Mob self) {}
 }
 
 class MoveManager {
-	public static Move findMove (validMove inMove) {
+	public static Move findMove (ValidMove inMove) {
 		switch (inMove) {
-			//Add moves here to find them from validMove
-			case block:
+			//Add moves here to find them from ValidMove
+			case BLOCK:
 				return new Block();
-			case feint:
+			case FEINT:
 				return new Feint();
-			case overt:
+			case OVERT:
 				return new Overt();
 			default: 
 				return new Yawn();
 		}
 	}
 	
-	public static boolean Offensive(validMove inMove) {
+	public static boolean offensive(ValidMove inMove) {
 		return findMove(inMove).offensive;
 	}
 	
-	public static void DoMove(validMove inMove, Mob inTarget, Mob inSelf) {
-		findMove(inMove).Do(inTarget, inSelf);
+	public static void doMove(ValidMove inMove, Mob inTarget, Mob inSelf) {
+		findMove(inMove).execute(inTarget, inSelf);
 	}
 }
 
@@ -34,17 +34,17 @@ class Block extends Move {
 		name = "Block";
 	}
 	
-	public void Do(Mob inTarget, Mob inSelf) {
+	public void execute(Mob inTarget, Mob inSelf) {
 		System.out.println(inSelf.name + " starts blocking.");
 		StatEffect temp = null;
 		for (StatEffect effect : inTarget.effectList) {
-			if (effect.heldEffect == validEffect.blocking) {
+			if (effect.heldEffect == ValidEffect.BLOCKING) {
 				temp = effect;
 			}
 		}
 		
 		if (temp == null) {
-			inSelf.effectList.add(new StatEffect(validEffect.blocking, 3, "Blocking"));
+			inSelf.effectList.add(new StatEffect(ValidEffect.BLOCKING, 3, "Blocking"));
 		} else {
 			temp.durationLeft = 3;
 		}
@@ -57,11 +57,11 @@ class Feint extends Move {
 		name = "Feint";
 	}
 	
-	public void Do(Mob inTarget, Mob inSelf) {
+	public void execute(Mob inTarget, Mob inSelf) {
 		boolean targetBlocking = false;
 		
 		for (StatEffect effect : inTarget.effectList) {
-			if (effect.heldEffect == validEffect.blocking) {
+			if (effect.heldEffect == ValidEffect.BLOCKING) {
 				targetBlocking = true;
 			}
 		}
@@ -82,11 +82,11 @@ class Overt extends Move {
 		name = "Overt";
 	}
 	
-	public void Do(Mob inTarget, Mob inSelf) {
+	public void execute(Mob inTarget, Mob inSelf) {
 		boolean targetBlocking = false;
 		
 		for (StatEffect effect : inTarget.effectList) {
-			if (effect.heldEffect == validEffect.blocking) {
+			if (effect.heldEffect == ValidEffect.BLOCKING) {
 				targetBlocking = true;
 			}
 		}
@@ -106,7 +106,7 @@ class Yawn extends Move {
 		name = "Yawn";
 	}
 	
-	public void Do(Mob inTarget, Mob inSelf) {
+	public void execute(Mob inTarget, Mob inSelf) {
 		System.out.println(inSelf.name + " yawns loudly at " + inTarget.name);
 	}
 }

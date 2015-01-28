@@ -12,7 +12,7 @@ class Game {
 	
 	
 	
-	public void Tick() {
+	public void tick() {
 		for (StatEffect effect : player.effectList) {
 			effect.durationLeft--;
 			if (effect.durationLeft <= 0) {

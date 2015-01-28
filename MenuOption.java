@@ -1,6 +1,6 @@
 class MenuOption {
 	public String text;	
-	public void Execute() {}
+	public void execute() {}
 }
 
 class Quit extends MenuOption{
@@ -8,7 +8,7 @@ class Quit extends MenuOption{
 		text = " : Quit";
 	}
 	
-	public void Execute() {
+	public void execute() {
 		Main.running = false;
 	}
 }
@@ -19,27 +19,27 @@ class StartGame extends MenuOption{
 		text = " : Start a New Game";
 	}
 	
-	public void Execute() {
+	public void execute() {
 		Main.currentGame = new Game();
 		Main.currentMenu = new GameMenu();
 	}
 }
 
 class MoveToMenu extends MenuOption {
-	validMove heldMove;
-	public MoveToMenu (validMove inMove) {
+	ValidMove heldMove;
+	public MoveToMenu (ValidMove inMove) {
 		heldMove = inMove;
 		text = " : " + MoveManager.findMove(heldMove).name;
 	}
 	
-	public void Execute() {
+	public void execute() {
 		Mob target;
-		if (MoveManager.Offensive(heldMove)) {
+		if (MoveManager.offensive(heldMove)) {
 			target = Main.currentGame.enemy;
 		} else {
 			target = Main.currentGame.player;
 		}
 		
-		MoveManager.DoMove(heldMove, target, Main.currentGame.player);
+		MoveManager.doMove(heldMove, target, Main.currentGame.player);
 	}
 }
