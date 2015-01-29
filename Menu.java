@@ -35,8 +35,8 @@ class TitleScreen extends Menu  {
 
 class GameMenu extends Menu {
 	public GameMenu() {
-		text = "\n\n\n";
-		text += "-------------------------------------\n";
+		
+		text = "-------------------------------------\n";
 		text += "|         Battle Screen             |\n";
 		text += "-------------------------------------\n";
 		
@@ -75,18 +75,20 @@ class GameMenu extends Menu {
 			System.out.println("Please enter a valid option");
 		}
 		
-		if (Main.currentGame.enemy.HP <= 0) {
-			Main.currentMenu = new Victory();
+		if (heldOptions.get(selection).advanceTurn) {
+		
+			if (Main.currentGame.enemy.HP <= 0) {
+				Main.currentMenu = new Victory();
+			} else {
+				Main.currentGame.enemy.takeTurn();
+			}
+			
+			if (Main.currentGame.player.HP <= 0) {
+				Main.currentMenu = new Loss();
+			}
+			
+			Main.currentGame.tick();
 		}
-		
-		Main.currentGame.enemy.takeTurn();
-		
-		
-		if (Main.currentGame.player.HP <= 0) {
-			Main.currentMenu = new Loss();
-		}
-		
-		Main.currentGame.tick();
 	}
 }
 

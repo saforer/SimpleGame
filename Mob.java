@@ -35,6 +35,7 @@ class Player extends Mob {
 		moveList.add(ValidMove.OVERT);
 		moveList.add(ValidMove.FEINT);
 		moveList.add(ValidMove.BLOCK);
+		moveList.add(ValidMove.HEAL);
 	}
 }
 
@@ -51,5 +52,6 @@ class Skeleton extends Mob {
 		moveList.add(ValidMove.FEINT);
 		moveList.add(ValidMove.BLOCK);
 		moveList.add(ValidMove.YAWN);
+		moveList.add(ValidMove.HEAL);
 	}
 }

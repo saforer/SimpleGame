@@ -1,4 +1,5 @@
 class MenuOption {
+	public boolean advanceTurn = false;
 	public String text;	
 	public void execute() {}
 }
@@ -28,12 +29,14 @@ class StartGame extends MenuOption{
 class MoveToMenu extends MenuOption {
 	ValidMove heldMove;
 	public MoveToMenu (ValidMove inMove) {
+		advanceTurn = true;
 		heldMove = inMove;
 		text = " : " + MoveManager.findMove(heldMove).name;
 	}
 	
 	public void execute() {
 		Mob target;
+		
 		if (MoveManager.offensive(heldMove)) {
 			target = Main.currentGame.enemy;
 		} else {

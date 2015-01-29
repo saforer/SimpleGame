@@ -14,6 +14,8 @@ class MoveManager {
 				return new Feint();
 			case OVERT:
 				return new Overt();
+			case HEAL:
+				return new Heal();
 			default: 
 				return new Yawn();
 		}
@@ -108,5 +110,18 @@ class Yawn extends Move {
 	
 	public void execute(Mob inTarget, Mob inSelf) {
 		System.out.println(inSelf.name + " yawns loudly at " + inTarget.name);
+	}
+}
+
+class Heal extends Move {
+	public Heal() {
+		offensive = false;
+		name = "Heal";
+	}
+	
+	public void execute(Mob inTarget, Mob inSelf) {
+		int healVal = 5;
+		System.out.println(inSelf.name + " heals himself for " + healVal);
+		inTarget.HP += healVal;
 	}
 }
