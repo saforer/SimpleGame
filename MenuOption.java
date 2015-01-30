@@ -52,7 +52,7 @@ class MoveToMenu extends MenuOption {
 		List<Mob> tempList = new ArrayList<Mob>();
 		List<Mob> outputList = new ArrayList<Mob>();
 		
-		while (i < MoveManager.moveNumber(moveHeld)) {
+		while (outputList.size() < MoveManager.moveNumber(moveHeld)) {
 			//if the spell targets allies, let allies be targetted as long as they aren't the caster.
 			if (allyTarget) {
 				for (Mob ally : Main.currentGame.allyList) {
