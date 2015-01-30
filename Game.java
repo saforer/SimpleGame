@@ -7,13 +7,13 @@ class Game {
 	
 	
 	public Game() {
-		allyList.add(new Player(false));
-		allyList.add(new Player(false));
-		allyList.add(new Player(false));
+		for (int i = 0; i<5; i++) {
+			allyList.add(new Player(false));
+		}
 		
-		enemyList.add(new Skeleton(true));
-		enemyList.add(new Skeleton(true));
-		enemyList.add(new Skeleton(true));
+	for (int i = 0; i<5; i++) {
+			enemyList.add(new Skeleton(true));
+		}
 	}
 		
 	public void tick() {
