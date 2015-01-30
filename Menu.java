@@ -84,12 +84,9 @@ class GameMenu extends Menu {
 			try {
 				int selection = scan.nextInt() - 1;
 				heldOptions.get(selection).execute();
-				
 			} catch (Exception err) {
-				System.out.println("Please enter a valid option");
-			}
-			
-			
+				System.out.println("Please enter a valid option (Error in Menu.java)");
+			}			
 		}
 	}
 }

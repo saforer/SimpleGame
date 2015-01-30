@@ -45,7 +45,6 @@ class MoveToMenu extends MenuOption {
 		target.caster = Main.currentMenu.currentPlayer;
 		
 		//Figure out who needs to be allowed to be selected.
-		int i = 0;
 		boolean selfTarget = false;
 		boolean allyTarget = false;
 		boolean enemyTarget = true;
@@ -95,7 +94,7 @@ class MoveToMenu extends MenuOption {
 				System.out.println(tempList.get(selection).name);
 				outputList.add(tempList.get(selection));
 			} catch (Exception err) {
-				System.out.println("Please enter a valid option");
+				System.out.println("Please enter a valid option (Error in MenuOption.java)");
 			}			
 			
 			tempList.clear();			
