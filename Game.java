@@ -1,36 +1,22 @@
 import java.util.*;
 
 class Game {
-	Mob player;
-	Mob enemy;
+	List<Mob> allyList = new ArrayList<Mob>();
+	List<Mob> enemyList = new ArrayList<Mob>();
 	List<StatEffect> toRemove = new ArrayList<StatEffect>();
 	
+	
 	public Game() {
-		player = new Player();
-		enemy = new Skeleton();
+		allyList.add(new Player(false));
+		allyList.add(new Player(false));
+		allyList.add(new Player(false));
+		
+		enemyList.add(new Skeleton(true));
+		enemyList.add(new Skeleton(true));
+		enemyList.add(new Skeleton(true));
 	}
-	
-	
-	
+		
 	public void tick() {
-		for (StatEffect effect : player.effectList) {
-			effect.durationLeft--;
-			if (effect.durationLeft <= 0) {
-				toRemove.add(effect);
-			}
-		}
 		
-		player.effectList.removeAll(toRemove);
-		toRemove.clear();
-		
-		for (StatEffect effect : enemy.effectList) {
-			effect.durationLeft--;
-			if (effect.durationLeft <= 0) {
-				toRemove.add(effect);
-			}
-		}
-		
-		enemy.effectList.removeAll(toRemove);
-		toRemove.clear();
 	}
 }

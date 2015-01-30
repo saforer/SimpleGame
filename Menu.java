@@ -3,6 +3,7 @@ import java.util.*;
 class Menu {
 	public String text;
 	public List<MenuOption> heldOptions = new ArrayList<MenuOption>();	
+	public Mob currentPlayer;
 	public void run() {
 		System.out.println(text);
 		int i = 0;
@@ -34,76 +35,61 @@ class TitleScreen extends Menu  {
 }
 
 class GameMenu extends Menu {
+	
+	public Mob currentPlayer;
+	
 	public GameMenu() {
 		
 		text = "-------------------------------------\n";
 		text += "|         Battle Screen             |\n";
 		text += "-------------------------------------\n";
 		
-		heldOptions.add(new Quit());
-		
-		for (ValidMove move : Main.currentGame.player.moveList) {
-			heldOptions.add(new MoveToMenu(move));
-		}
 	}
 	
 	public void run() {
-		System.out.println(text);
-		System.out.println(Main.currentGame.player.name + " HP : " + Main.currentGame.player.HP + "\n");
-		for (StatEffect effect : Main.currentGame.player.effectList) {
-			System.out.println("Effect: " + effect.name + " for " + effect.durationLeft + " turns.");
-		}
+		int j = 1;
+		//For each player in the list who needs to get a turn
+		for (Mob ally : Main.currentGame.allyList) {
+			heldOptions.clear();
+			currentPlayer = ally;
+			System.out.println(text);
+			System.out.println("Player " + j + "'s Turn");
+			j++;
 		
-		System.out.println(Main.currentGame.enemy.name + " HP : " + Main.currentGame.enemy.HP + "\n");
-		for (StatEffect effect : Main.currentGame.enemy.effectList) {
-			System.out.println("Effect: " + effect.name + " for " + effect.durationLeft + " turns.");
-		}
-		
-		int i = 0;
-		for (MenuOption option : heldOptions) {
-			System.out.println(i + " " + option.text);
-			i++;
-		}
-		
-		int selection = 0;
-		Scanner scan = new Scanner(System.in);
-		
-		try {
-			selection = scan.nextInt();
-			heldOptions.get(selection).execute();
-		} catch (Exception err) {
-			System.out.println("Please enter a valid option");
-		}
-		
-		if (heldOptions.get(selection).advanceTurn) {
-		
-			if (Main.currentGame.enemy.HP <= 0) {
-				Main.currentMenu = new Victory();
-			} else {
-				Main.currentGame.enemy.takeTurn();
+			int k = 1;
+			for (Mob mob : Main.currentGame.allyList) {
+				System.out.println(k + " | " + mob.name);
+				k++;
 			}
 			
-			if (Main.currentGame.player.HP <= 0) {
-				Main.currentMenu = new Loss();
+			for (Mob mob : Main.currentGame.enemyList) {
+				System.out.println(k + " | " + mob.name);
+				k++;
 			}
 			
-			Main.currentGame.tick();
+			System.out.println("-------------------------------------");
+			
+			for (ValidMove move : currentPlayer.moveList) {
+				heldOptions.add(new MoveToMenu(move));
+				
+			}
+			
+			int i = 1;
+			for (MenuOption option : heldOptions) {
+				System.out.println(i + " " + option.text);
+				i++;
+			}
+			
+			Scanner scan = new Scanner(System.in);
+			try {
+				int selection = scan.nextInt() - 1;
+				heldOptions.get(selection).execute();
+				
+			} catch (Exception err) {
+				System.out.println("Please enter a valid option");
+			}
+			
+			
 		}
-	}
-}
-
-class Victory extends Menu {
-	public Victory () {
-		text = "Congratulations on winning with " + Main.currentGame.player.HP + " health left on " + Main.currentGame.player.name;
-		
-		heldOptions.add(new Quit());
-	}
-}
-
-class Loss extends Menu {
-	public Loss () {
-		text = "Lost with " + Main.currentGame.player.HP + " health left on " + Main.currentGame.player.name + "\nThank you for play.";
-		
-		heldOptions.add(new Quit());
 	}
 }

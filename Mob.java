@@ -7,24 +7,16 @@ class Mob {
 	public List<ValidMove> moveList = new ArrayList<ValidMove>();
 	public List<StatEffect> effectList = new ArrayList<StatEffect>();
 	public void getMoveList() {}
+	public boolean isEnemy;
 	
 	public void takeTurn() {
-		int randomSelection = (int)(Math.random() * moveList.size());
-		ValidMove moveToDo = moveList.get(randomSelection);
 		
-		Mob target;
-		if (MoveManager.offensive(moveToDo)) {
-			target = Main.currentGame.player;
-		} else {
-			target = Main.currentGame.enemy;
-		}
-		
-		MoveManager.doMove(moveToDo, target, this);
 	}
 }
 
 class Player extends Mob {
-	public Player() {
+	public Player(boolean inIsEnemy) {
+		isEnemy = inIsEnemy;
 		getMoveList();
 		name = "Player";
 		HP = 100;
@@ -32,15 +24,15 @@ class Player extends Mob {
 	}
 	
 	public void getMoveList() {
-		moveList.add(ValidMove.OVERT);
-		moveList.add(ValidMove.FEINT);
-		moveList.add(ValidMove.BLOCK);
-		moveList.add(ValidMove.HEAL);
+		moveList.add(ValidMove.PUNCH);
+		moveList.add(ValidMove.SHIELD);
+		moveList.add(ValidMove.BACKHAND);
 	}
 }
 
 class Skeleton extends Mob {
-	public Skeleton() {
+	public Skeleton(boolean inIsEnemy) {
+		isEnemy = inIsEnemy;
 		getMoveList();
 		name = "Skeleton";
 		HP = 100;
@@ -48,10 +40,6 @@ class Skeleton extends Mob {
 	}
 	
 	public void getMoveList() {
-		moveList.add(ValidMove.OVERT);
-		moveList.add(ValidMove.FEINT);
-		moveList.add(ValidMove.BLOCK);
-		moveList.add(ValidMove.YAWN);
-		moveList.add(ValidMove.HEAL);
+		
 	}
 }

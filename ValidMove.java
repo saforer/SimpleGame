@@ -1,7 +1,5 @@
 public enum ValidMove {
-	YAWN,
-	BLOCK,
-	OVERT,
-	FEINT,
-	HEAL
+	PUNCH,
+	SHIELD,
+	BACKHAND
 }
