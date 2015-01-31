@@ -88,8 +88,8 @@ class MoveToMenu extends MenuOption {
 			
 			
 			//Wait for the player to select who to add to the list
-			Scanner scan = new Scanner(System.in);
 			try {
+				Scanner scan = new Scanner();
 				int selection = scan.nextInt() - 1;
 				System.out.println(tempList.get(selection).name);
 				outputList.add(tempList.get(selection));

@@ -2,6 +2,7 @@ import java.util.*;
 
 class Menu {
 	public String text;
+	public Scanner scan;
 	public List<MenuOption> heldOptions = new ArrayList<MenuOption>();	
 	public Mob currentPlayer;
 	public void run() {
@@ -80,11 +81,12 @@ class GameMenu extends Menu {
 				i++;
 			}
 			
-			Scanner scan = new Scanner(System.in);
+			scan = new Scanner(System.in);
 			try {
 				int selection = scan.nextInt() - 1;
 				heldOptions.get(selection).execute();
 			} catch (Exception err) {
+				System.out.println(err);
 				System.out.println("Please enter a valid option (Error in Menu.java)");
 			}			
 		}
